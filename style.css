@@ -293,6 +293,7 @@ h1, h2, h3, h4 {
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  cursor:pointer;
 }
 
 .hero-scroll span {
@@ -308,12 +309,33 @@ h1, h2, h3, h4 {
   background: linear-gradient(to bottom, var(--color-primary), transparent);
   animation: scrollPulse 2s infinite;
 }
-
+.hero-scroll:hover span {
+  color: var(--color-primary);
+  transition: color var(--transition);
+}
+.clicktoscroll {
+  font-family: 'Palatino Linotype', Palatino, 'Book Antiqua', serif;
+  font-style: italic;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  margin-top: -0.8rem;
+  color: var(--color-text-muted);
+  text-transform: none !important;
+}
 @keyframes scrollPulse {
   0%, 100% { opacity: 1; transform: scaleY(1); }
   50% { opacity: 0.5; transform: scaleY(0.8); }
 }
 
+.scroll-arrow {
+  color: var(--color-primary);
+  animation: bounceDown 1.5s infinite;
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
 /* About Section */
 .about {
   padding: 120px 0;

@@ -232,6 +232,46 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+/// Scroll to Discover - Auto slow scroll
+const heroScroll = document.querySelector('.hero-scroll');
+let autoScrollInterval = null;
+
+// top: pixels per step | 10: interval in ms
+// top:1 + 20ms = dreamy slow | top:1 + 10ms = default | top:2 + 10ms = faster
+
+function startAutoScroll() {
+  autoScrollInterval = setInterval(() => {
+    window.scrollBy({ top: 2, behavior: 'instant' });
+
+    // Stop automatically if bottom of page is reached
+    if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
+      stopAutoScroll();
+    }
+  }, 15);
+}
+
+function stopAutoScroll() {
+  if (autoScrollInterval) {
+    clearInterval(autoScrollInterval);
+    autoScrollInterval = null;
+  }
+}
+
+if (heroScroll) {
+  heroScroll.style.cursor = 'pointer';
+
+  // Toggle scroll on click — click once to start, click again to stop
+  heroScroll.addEventListener('click', () => {
+    autoScrollInterval ? stopAutoScroll() : startAutoScroll();
+  });
+}
+
+// Stop scrolling on any user interaction
+['mousemove', 'touchstart', 'keydown', 'wheel', 'pointerdown'].forEach(event => {
+  window.addEventListener(event, stopAutoScroll);
+});
+
+
 // Event Listeners
 window.addEventListener('scroll', handleScroll);
 navToggle.addEventListener('click', toggleMobileMenu);
