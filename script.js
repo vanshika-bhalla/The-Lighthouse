@@ -10,7 +10,7 @@ const reservationBg = document.getElementById("reservationBg");
 const reservationForm = document.getElementById("reservationForm");
 const dateInput = document.getElementById("date");
 const timeSelect = document.getElementById("time");
-
+const themeToggle = document.getElementById("themeToggle");
 if (dateInput) {
   const today = new Date().toISOString().split("T")[0];
   dateInput.setAttribute("min", today);
@@ -146,6 +146,31 @@ function switchMenuTab(e) {
     }
   });
 }
+
+//
+// Theme Toggle
+const savedTheme = localStorage.getItem("theme");
+
+if (savedTheme === "light") {
+  document.body.classList.add("light-theme");
+  themeToggle.textContent = "☀️";
+} else {
+  themeToggle.textContent = "🌙";
+}
+
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("light-theme");
+
+  const isLight = document.body.classList.contains("light-theme");
+
+  if (isLight) {
+    localStorage.setItem("theme", "light");
+    themeToggle.textContent = "☀️";
+  } else {
+    localStorage.setItem("theme", "dark");
+    themeToggle.textContent = "🌙";
+  }
+});
 
 // ── Menu Search and Filter ─────────────────────────
 
