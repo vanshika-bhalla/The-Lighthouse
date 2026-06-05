@@ -463,14 +463,16 @@ function renderReviews() {
 
 // Star rating widget
 let selectedRating = 0;
-const starBtns = document.querySelectorAll("#star-input .star-btn");
+const starInput = document.getElementById("star-input");
+const starBtns = starInput ? starInput.querySelectorAll(".star-btn") : [];
 
 starBtns.forEach((btn) => {
   btn.addEventListener("mouseenter", () => {
     const val = +btn.dataset.value;
-    starBtns.forEach((s) =>
-      s.classList.toggle("active", +s.dataset.value <= val),
-    );
+    starBtns.forEach((s) => {
+      const starVal = +s.dataset.value;
+      s.classList.toggle("active", starVal <= val);
+    });
   });
   btn.addEventListener("mouseleave", () => {
     starBtns.forEach((s) =>
@@ -488,6 +490,9 @@ starBtns.forEach((btn) => {
 
 // Form submit
 const reviewForm = document.getElementById("review-form");
+if (!reviewForm || !reviewMsg) {
+  console.warn("Review form not found in HTML");
+}
 const reviewMsg = document.getElementById("review-msg");
 function isMeaningfulReview(text) {
   // At least 3 real words
@@ -558,6 +563,9 @@ if (reviewForm) {
 
     const reviews = getReviews();
     reviews.unshift(newReview);
+    if (reviews.length > 20) {
+      reviews.pop();
+    }
 
     saveReviews(reviews);
     renderReviews();
@@ -590,10 +598,7 @@ window.addEventListener("scroll", () => {
   } else {
     backToTopBtn.style.display = "none";
   }
-});
 
-// Show/hide on scroll
-window.addEventListener("scroll", () => {
   if (window.scrollY > 300) {
     backToTopBtn.classList.add("visible");
   } else {
