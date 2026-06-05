@@ -260,7 +260,18 @@ If you like this project:
 - Contribute to improve it further
 
 ---
+## ⭐ Contribution: Food Rating & Review System
 
+I have implemented a new feature for the platform:
+
+- Interactive star-based food rating system
+- User review submission functionality
+- LocalStorage-based persistent review storage (frontend-only implementation)
+- Dynamic rendering of reviews on page load
+- Input validation for ratings, name, and review text
+- Improved user experience with instant UI updates
+
+This feature enhances user engagement and helps users make better food choices based on community feedback.
 # 🔗 Repository
 
 GitHub Repository:  
